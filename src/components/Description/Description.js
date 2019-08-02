@@ -1,18 +1,20 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import './Description.css'
 
-export default function Description(props) {
-
+export default class Description extends React.Component {
+render() {
   let image;
-  if(props.image !== ''){
-    image = <img src={props.image} className="logo" alt="petful logo"></img>
+  if(this.props.image !== ''){
+    image = <img src={this.props.image} className="logo" alt="petful logo"></img>
   }
 
 return(
   <div className="center">
     {image}
-    {props.intro}
-    <button>Adopt!</button>
+    {this.props.intro}
+    <button><Link to="/pets">Adopt!</Link></button>
   </div>
 )
+}
 }

@@ -6,7 +6,7 @@ export default class LandingPage extends React.Component {
   render() {
     return(
       <div>
-        <Description image={this.props.image} intro={this.props.intro}/>
+        <Description image={this.props.image} intro={this.props.intro} {...this.props}/>
       </div>
     )
   }
