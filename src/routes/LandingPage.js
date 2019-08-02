@@ -1,5 +1,5 @@
 import React from 'react';
-import Description from '../components/Description';
+import Description from '../components/Description/Description';
 
 export default class LandingPage extends React.Component {
 
