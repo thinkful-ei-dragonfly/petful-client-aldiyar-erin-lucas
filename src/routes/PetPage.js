@@ -28,7 +28,7 @@ export default class PetPage extends React.Component {
   render() {
     return (
       <>
-        <h1>Here are the pets available for Adoption</h1>
+        <h2>Here are the pets available for Adoption</h2>
         <main className='pets-wrapper'>
           <Cat
             cat={this.state.cat}
