@@ -23,7 +23,7 @@ export default class Cat extends React.Component {
   render() {
   let cat;
   if(this.props.cat[0]){
-    cat = 
+    cat =
     <div>
     <img src={this.props.cat[0].imageURL} className="cat-image" alt={this.props.cat.imageDescription}></img>
     <section className='pet-info'>
@@ -40,11 +40,22 @@ export default class Cat extends React.Component {
       cat = 'All animals have been adopted';
     }
   }
+  let button = ''
+    if (this.props.cat[0].adopter) {
+      if (this.props.cat[0].adopter.name === 'ME' ) {
+        button = <button type="button" onClick={() =>{this.handleDelete()}}>Adopt {this.props.cat[0].name}</button>
+      } else {
+        button = <button type="button" onClick={() =>{this.handleDelete()}}>{this.props.cat[0].name} has been adopted by {this.props.cat[0].adopter.name}. Click here to see the next pet</button>
+      }
+    } else {
+      button = <button type="button" onClick={() =>{this.handleDelete()}}>Adopt {this.props.cat[0].name}</button>
+    }
 
 return(
   <div className='cat'>
     {cat}
-    <button type="button" onClick={() =>{this.handleDelete()}}>Adopt {this.props.cat[0].name}</button>
+
+    {button}
     <CatQueue cat={this.props.cat}/>
   </div>
 )
