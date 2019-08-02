@@ -1,8 +1,9 @@
 import React from 'react';
 import { Route } from 'react-router-dom'
 import LandingPage from './routes/LandingPage';
+import PetPage from './routes/PetPage'
 import config from './config';
-import './App.css';
+import './App.scss';
 
 class App extends React.Component{
 
@@ -38,15 +39,20 @@ render() {
   return (
     <div className="App">
       <h1>Petful</h1>
-      <Route 
+      <Route
         exact path={'/'}
-        component={props => 
+        component={props =>
           <LandingPage
             image={this.state.image}
             intro={this.state.intro}
             {...props}
-            />} 
+            />}
           />
+        <Route
+          exact path={'/pets'}
+          component={PetPage}
+          />
+
     </div>
   );
   }
