@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "name": "petful-app",
+  "alias": "lucas-erin-aldiyar-petful-app",
+  "routes": [
+      {
+        "src": "^/static/(.*)",
+        "dest": "/static/$1"
+      },
+      {
+        "src": ".*",
+        "dest": "/index.html"
+      }
+  ]
+}

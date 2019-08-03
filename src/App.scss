@@ -2,11 +2,13 @@ $highlightcolor: navy;
 
 body {
   font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  letter-spacing: 0.05em;
 }
 
 h1, h2 {
   margin: 2% auto;
   text-align: center;
+  font-weight: 400;
 }
 
 button {
@@ -14,6 +16,31 @@ button {
   padding: 15px;
 }
 
+header {
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  img {
+    max-width: 1em;
+    vertical-align: baseline;
+  }
+}
+.landing-page {
+  text-align: center;
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+  button {
+    display: block;
+    margin: 0 auto;
+    text-transform: uppercase;
+  }
+  a {
+    text-decoration: none;
+  }
+}
 .pets-wrapper {
   display: flex;
 

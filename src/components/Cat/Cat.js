@@ -37,7 +37,7 @@ export default class Cat extends React.Component {
     </div>
 
     if(!this.props.cat){
-      cat = 'All animals have been adopted';
+      cat = `All animals have been adopted. Check back in an hour to see if they've been returned`;
     }
   }
   let button = ''
@@ -45,7 +45,7 @@ export default class Cat extends React.Component {
       if (this.props.cat[0].adopter.name === 'ME' ) {
         button = <button type="button" onClick={() =>{this.handleDelete()}}>Adopt {this.props.cat[0].name}</button>
       } else {
-        button = <button type="button" onClick={() =>{this.handleDelete()}}>{this.props.cat[0].name} has been adopted by {this.props.cat[0].adopter.name}. Click here to see the next pet</button>
+        button = <button type="button" onClick={() =>{this.handleDelete()}}>{this.props.cat[0].name} has been adopted by {this.props.cat[0].adopter.name}. Click here to see if your turn is next</button>
       }
     } else {
       button = <button type="button" onClick={() =>{this.handleDelete()}}>Adopt {this.props.cat[0].name}</button>

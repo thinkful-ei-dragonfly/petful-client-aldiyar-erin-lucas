@@ -1,9 +1,10 @@
 import React from 'react';
-import { Route } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 import LandingPage from './routes/LandingPage';
 import PetPage from './routes/PetPage'
 import config from './config';
 import './App.scss';
+import image from './fybfalxjivqrcwdhz00d.png'
 
 class App extends React.Component{
 
@@ -38,7 +39,7 @@ class App extends React.Component{
 render() {
   return (
     <div className="App">
-      <h1>Petful</h1>
+      <header><Link to='/'><h1>Petful <img src={image} alt='Petful Logo'></img></h1></Link></header>
       <Route
         exact path={'/'}
         component={props =>
