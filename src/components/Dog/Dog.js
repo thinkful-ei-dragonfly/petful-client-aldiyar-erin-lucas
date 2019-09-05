@@ -15,13 +15,13 @@ export default class Dog extends React.Component {
       headers: {
         'content-type': 'application/json',
       }
+      })
         .then(() => {
           this.props.handleGetDogs();
         })
         .catch(err => {
           console.log(err);
         })
-    })
   }
 
   findPlace = () => {
