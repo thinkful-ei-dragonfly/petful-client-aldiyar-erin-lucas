@@ -12,7 +12,7 @@ render() {
 return(
   <div className="center">
     {image}
-    {this.props.intro}
+    <p className='intro-text'>{this.props.intro}</p>
     <button><Link to="/pets">Adopt!</Link></button>
   </div>
 )

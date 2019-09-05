@@ -26,21 +26,7 @@ header {
     vertical-align: baseline;
   }
 }
-.landing-page {
-  text-align: center;
-  img {
-    display: block;
-    margin: 0 auto;
-  }
-  button {
-    display: block;
-    margin: 0 auto;
-    text-transform: uppercase;
-  }
-  a {
-    text-decoration: none;
-  }
-}
+
 .pets-wrapper {
   display: flex;
 
@@ -96,4 +82,35 @@ ul{
   padding: 10px;
   margin: 5% auto;
   border-radius: 15px;
+}
+
+// updated styles
+.landing-page {
+  text-align: center;
+  img {
+    display: block;
+    margin: 0 auto 25px;
+    max-width: 100%;
+    width: 100%;
+
+    @media (min-width: 768px) {
+      max-width: 600px;
+    }
+  }
+  button {
+    display: block;
+    margin: 0 auto;
+    text-transform: uppercase;
+  }
+  a {
+    text-decoration: none;
+  }
+}
+
+.intro-text {
+  max-width: 40ch;
+  margin: 0 auto 25px;
+  @media (min-width: 768px) {
+    max-width: 75ch;
+  }
 }

@@ -43,12 +43,34 @@ export default class Cat extends React.Component {
   let button = ''
     if (this.props.cat[0].adopter) {
       if (this.props.cat[0].adopter.name === 'ME' ) {
-        button = <button type="button" onClick={() =>{this.handleDelete()}}>Adopt {this.props.cat[0].name}</button>
+        button = (
+          <>
+            <p>It's your turn to adopt!</p>
+            <button type="button" onClick={() =>{this.handleDelete()}}> Adopt {this.props.cat[0].name}</button>
+          </>
+        )
       } else {
-        button = <button type="button" onClick={() =>{this.handleDelete()}}>{this.props.cat[0].name} has been adopted by {this.props.cat[0].adopter.name}. Click here to see if your turn is next</button>
+        let next
+        if (this.props.cat[1].adopter && this.props.cat[1].adopter.name !== 'ME') {
+            next = <p>Up next is {this.props.cat[1]}.adopter.name</p>
+        } else if (!this.props.cat[1].adopter || this.props.cat[1].adopter.name === 'ME') {
+          next = <p>You're up next!</p>
+        }
+        button = (
+          <>
+            <p>It is currently not your turn. {this.props.cat[0].name} has been adopted by {this.props.cat[0].adopter.name}.</p>
+            {next}
+            <button type="button" onClick={() =>{this.handleDelete()}}>{this.props.cat[0].name} has been adopted by {this.props.cat[0].adopter.name}. Click here to see if your turn is next</button>
+          </>
+        )
       }
     } else {
-      button = <button type="button" onClick={() =>{this.handleDelete()}}>Adopt {this.props.cat[0].name}</button>
+      button = (
+        <>
+          <p>It's your turn to adopt!</p>
+          <button type="button" onClick={() =>{this.handleDelete()}}> Adopt {this.props.cat[0].name}</button>
+        </>
+    )
     }
 
 return(
