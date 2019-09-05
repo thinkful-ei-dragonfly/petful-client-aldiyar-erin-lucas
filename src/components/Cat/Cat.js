@@ -52,7 +52,7 @@ export default class Cat extends React.Component {
       } else {
         let next
         if (this.props.cat[1].adopter && this.props.cat[1].adopter.name !== 'ME') {
-            next = <p>Up next is {this.props.cat[1]}.adopter.name</p>
+            next = <p>Up next is {this.props.cat[1].adopter.name}</p>
         } else if (!this.props.cat[1].adopter || this.props.cat[1].adopter.name === 'ME') {
           next = <p>You're up next!</p>
         }
