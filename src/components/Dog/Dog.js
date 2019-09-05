@@ -5,18 +5,33 @@ import DogQueue from '../DogQueue/DogQueue'
 export default class Dog extends React.Component {
 
   handleDelete = () => {
+    this.startProcess()
+    setInterval(this.startProcess, 5000)
+  }
+
+  startProcess = () => {
     return fetch(`${config.API_ENDPOINT}/dogs`, {
       method: 'DELETE',
       headers: {
-        'content-type': 'applidogion/json',
+        'content-type': 'application/json',
+      }
+        .then(() => {
+          this.props.handleGetDogs();
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    })
+  }
+
+  findPlace = () => {
+    let placeInLine;
+    this.props.dog.forEach((dog, index) => {
+      if(dog.adopter === null){
+        placeInLine = index - 1
       }
     })
-      .then(()=> {
-        this.props.handleGetDogs();
-      })
-      .catch(err => {
-        console.log(err);
-      })
+    return placeInLine;
   }
 
   render() {
@@ -51,7 +66,7 @@ export default class Dog extends React.Component {
     } else {
       let next
       if (this.props.dog[1].adopter && this.props.dog[1].adopter.name !== 'ME') {
-          next = <p>Up next is {this.props.dog[1].adopter.name}</p>
+          next = <p>Up next is {this.props.dog[1].adopter.name} Your place in line: {this.findPlace()}</p>
       } else if (!this.props.dog[1].adopter || this.props.dog[1].adopter.name === 'ME') {
         next = <p>You're up next!</p>
       }
