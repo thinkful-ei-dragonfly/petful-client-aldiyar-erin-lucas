@@ -40,17 +40,37 @@ export default class Dog extends React.Component {
       }
     }
   let button = ''
-    if (this.props.dog[0].adopter) {
-      if (this.props.dog[0].adopter.name === 'ME' ) {
-        button = <button type="button" onClick={() =>{this.handleDelete()}}>Adopt {this.props.dog[0].name}</button>
-      } else {
-        button = (
-          <button type="button" onClick={() =>{this.handleDelete()}}>{this.props.dog[0].name} has been adopted by {this.props.dog[0].adopter.name}. Click here to see if your turn is next</button>
-        )
-      }
+  if (this.props.dog[0].adopter) {
+    if (this.props.dog[0].adopter.name === 'ME' ) {
+      button = (
+        <>
+          <p>It's your turn to adopt!</p>
+          <button type="button" onClick={() =>{this.handleDelete()}}> Adopt {this.props.dog[0].name}</button>
+        </>
+      )
     } else {
-      button = <button type="button" onClick={() =>{this.handleDelete()}}>Adopt {this.props.dog[0].name}</button>
+      let next
+      if (this.props.dog[1].adopter && this.props.dog[1].adopter.name !== 'ME') {
+          next = <p>Up next is {this.props.dog[1].adopter.name}</p>
+      } else if (!this.props.dog[1].adopter || this.props.dog[1].adopter.name === 'ME') {
+        next = <p>You're up next!</p>
+      }
+      button = (
+        <>
+          <p>It is currently not your turn. {this.props.dog[0].name} has been adopted by {this.props.dog[0].adopter.name}.</p>
+          {next}
+          <button type="button" onClick={() =>{this.handleDelete()}}>{this.props.dog[0].name} has been adopted by {this.props.dog[0].adopter.name}. Click here to see if your turn is next</button>
+        </>
+      )
     }
+  } else {
+    button = (
+      <>
+        <p>It's your turn to adopt!</p>
+        <button type="button" onClick={() =>{this.handleDelete()}}> Adopt {this.props.dog[0].name}</button>
+      </>
+  )
+  }
 
 return(
   <div className='dog'>
