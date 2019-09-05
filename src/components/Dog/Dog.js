@@ -1,5 +1,6 @@
 import React from 'react';
 import config from '../../config';
+
 import DogQueue from '../DogQueue/DogQueue'
 
 export default class Dog extends React.Component {
@@ -74,7 +75,7 @@ export default class Dog extends React.Component {
         <>
           <p>It is currently not your turn. {this.props.dog[0].name} has been adopted by {this.props.dog[0].adopter.name}.</p>
           {next}
-          <button type="button" onClick={() =>{this.handleDelete()}}>{this.props.dog[0].name} has been adopted by {this.props.dog[0].adopter.name}. Click here to see if your turn is next</button>
+          <button type="button" onClick={() =>{this.handleDelete()}}>Next dog</button>
         </>
       )
     }
@@ -90,6 +91,7 @@ export default class Dog extends React.Component {
 return(
   <div className='dog'>
     {dog}
+    
     {button}
     <DogQueue dog={this.props.dog}/>
   </div>
