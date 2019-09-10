@@ -5,12 +5,17 @@ import CatQueue from '../CatQueue/CatQueue';
 
 export default class Cat extends React.Component {
 
-  handleDelete = () => {
-    this.startProcess()
-    setInterval(this.startProcess, 5000)
+  // handleDelete = () => {
+  //   this.startProcess()
+  //   setInterval(this.startProcess, 5000)
+  // }
+
+  componentDidMount(){
+    let intervalId = setInterval(this.startProcess, 3000)
+    this.setState({ intervalId })
   }
 
-  startProcess = () => {
+  continueProcess = () => {
     return fetch(`${config.API_ENDPOINT}/cats`, {
       method: 'DELETE',
       headers: {
@@ -19,16 +24,37 @@ export default class Cat extends React.Component {
     })
       .then(()=> {
         this.props.handleGetCats();
+        let intervalId = setInterval(this.startProcess, 3000)
+        this.setState({ intervalId })
       })
       .catch(err => {
         console.log(err);
       })
   }
 
+  startProcess = () => {
+    if(this.props.cat[0].adopter === 'ME' || this.props.cat[0].adopter === null){
+      clearInterval(this.state.intervalId)
+    } else {
+      return fetch(`${config.API_ENDPOINT}/cats`, {
+        method: 'DELETE',
+        headers: {
+          'content-type': 'application/json',
+        }
+      })
+        .then(()=> {
+          this.props.handleGetCats();
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    }
+  }
+
   findPlace = () => {
     let placeInLine;
     this.props.cat.forEach((cat, index) => {
-      if(cat.adopter === null){
+      if(cat.adopter === null || cat.adopter === 'ME'){
           placeInLine = index -1
         }      
     })
@@ -61,7 +87,7 @@ export default class Cat extends React.Component {
         button = (
           <>
             <p>It's your turn to adopt!</p>
-            <button type="button" onClick={() =>{this.handleDelete()}}> Adopt {this.props.cat[0].name}</button>
+            <button type="button" onClick={this.continueProcess}> Adopt {this.props.cat[0].name}</button>
           </>
         )
       } else {
@@ -75,7 +101,7 @@ export default class Cat extends React.Component {
           <>
             <p>It is currently not your turn. {this.props.cat[0].name} has been adopted by {this.props.cat[0].adopter.name}.</p>
             {next}
-            <button type="button" onClick={() =>{this.handleDelete()}}>Next cat</button>
+            <button type="button" disabled>Adopt {this.props.cat[0].name}</button>
           </>
         )
       }
@@ -83,7 +109,7 @@ export default class Cat extends React.Component {
       button = (
         <>
           <p>It's your turn to adopt!</p>
-          <button type="button" onClick={() =>{this.handleDelete()}}> Adopt {this.props.cat[0].name}</button>
+          <button type="button" onClick={this.continueProcess}> Adopt {this.props.cat[0].name}</button>
         </>
     )
     }

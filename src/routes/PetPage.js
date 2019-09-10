@@ -83,7 +83,6 @@ export default class PetPage extends React.Component {
       requestDog
     ])
     .then(res => {
-      console.log(res)
       this.setState({
         cat: res[0],
         dog: res[1]
