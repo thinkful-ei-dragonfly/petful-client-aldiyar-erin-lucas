@@ -5,11 +5,6 @@ import CatQueue from '../CatQueue/CatQueue';
 
 export default class Cat extends React.Component {
 
-  // handleDelete = () => {
-  //   this.startProcess()
-  //   setInterval(this.startProcess, 5000)
-  // }
-
   componentDidMount(){
     let intervalId = setInterval(this.startProcess, 3000)
     this.setState({ intervalId })
@@ -117,7 +112,6 @@ export default class Cat extends React.Component {
 return(
   <div className='cat'>
     {cat}
-
     {button}
     <CatQueue cat={this.props.cat}/>
   </div>
