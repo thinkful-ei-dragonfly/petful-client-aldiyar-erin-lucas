@@ -9,9 +9,9 @@ import image from './fybfalxjivqrcwdhz00d.png'
 class App extends React.Component{
 
   state = {
-    image: 'https://images.livemint.com/rf/Image-621x414/LiveMint/Period2/2018/06/02/Photos/Processed/pets1-kYdB--621x414@LiveMint.jpg',
-    intro: 'Hello, welcome to Petful.',
-  }
+    image: '',
+    intro: 'Loading...',
+  } 
 
   componentDidMount(){
     return fetch(`${config.API_ENDPOINT}/`, {

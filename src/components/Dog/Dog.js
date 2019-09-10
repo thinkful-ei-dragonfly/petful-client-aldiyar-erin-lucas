@@ -4,19 +4,55 @@ import DogQueue from '../DogQueue/DogQueue'
 
 export default class Dog extends React.Component {
 
-  handleDelete = () => {
+  componentDidMount(){
+    let intervalId = setInterval(this.startProcess, 3000)
+    this.setState({ intervalId })
+  }
+
+  continueProcess = () => {
     return fetch(`${config.API_ENDPOINT}/dogs`, {
       method: 'DELETE',
       headers: {
-        'content-type': 'applidogion/json',
+        'content-type': 'application/json',
       }
     })
       .then(()=> {
         this.props.handleGetDogs();
+        let intervalId = setInterval(this.startProcess, 3000)
+        this.setState({ intervalId })
       })
       .catch(err => {
         console.log(err);
       })
+  }
+
+  startProcess = () => {
+    if(this.props.dog[0].adopter === 'ME' || this.props.dog[0].adopter === null){
+      clearInterval(this.state.intervalId)
+    } else {
+      return fetch(`${config.API_ENDPOINT}/dogs`, {
+        method: 'DELETE',
+        headers: {
+          'content-type': 'application/json',
+        }
+      })
+        .then(()=> {
+          this.props.handleGetDogs();
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    }
+  }
+
+  findPlace = () => {
+    let placeInLine;
+    this.props.dog.forEach((dog, index) => {
+      if(dog.adopter === null || dog.adopter === 'ME'){
+          placeInLine = index -1
+        }      
+    })
+    return placeInLine;
   }
 
   render() {
@@ -45,7 +81,7 @@ export default class Dog extends React.Component {
       button = (
         <>
           <p>It's your turn to adopt!</p>
-          <button type="button" onClick={() =>{this.handleDelete()}}> Adopt {this.props.dog[0].name}</button>
+          <button type="button" onClick={this.continueProcess}> Adopt {this.props.dog[0].name}</button>
         </>
       )
     } else {
@@ -59,7 +95,7 @@ export default class Dog extends React.Component {
         <>
           <p>It is currently not your turn. {this.props.dog[0].name} has been adopted by {this.props.dog[0].adopter.name}.</p>
           {next}
-          <button type="button" onClick={() =>{this.handleDelete()}}>{this.props.dog[0].name} has been adopted by {this.props.dog[0].adopter.name}. Click here to see if your turn is next</button>
+          <button type="button" disabled>Adopt {this.props.dog[0].name}</button>
         </>
       )
     }
@@ -67,7 +103,7 @@ export default class Dog extends React.Component {
     button = (
       <>
         <p>It's your turn to adopt!</p>
-        <button type="button" onClick={() =>{this.handleDelete()}}> Adopt {this.props.dog[0].name}</button>
+        <button type="button" onClick={this.continueProcess}> Adopt {this.props.dog[0].name}</button>
       </>
   )
   }
